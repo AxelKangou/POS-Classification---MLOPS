@@ -22,7 +22,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 DATA_DIR = "dataset_pos_train/"
 BATCH_SIZE = 16
 EPOCHS = 3
-N_SPLITS = 5
+N_SPLITS = 3
 MODEL_NAME = "resnet18"  # or efficientnet_b0
 
 # =====================
@@ -95,7 +95,11 @@ def evaluate(model, loader):
 # =====================
 def main():
 
-    Path("modelss").mkdir(parents=True, exist_ok=True)
+    base_dir = os.getcwd() 
+    model_dir = os.path.join(base_dir, 'models')
+    os.makedirs(model_dir, exist_ok=True)
+
+    #Path("modelss").mkdir(parents=True, exist_ok=True)
     dataset = ImageFolder(DATA_DIR, transform=train_transform)
     targets = dataset.targets
     num_classes = len(dataset.classes)
@@ -136,7 +140,9 @@ def main():
 
                 if acc > best_acc:
                     best_acc = acc
-                    torch.save(model.state_dict(), f"models/best_model_fold{fold}.pth")
+                    #save_path = os.path.join(model_dir, f"best_model_fold{fold}.pth")
+                    #torch.save(model.state_dict(), save_path)
+                    torch.save(model.state_dict(), f"modelss/best_model_fold{fold}.pth")
 
             fold_scores.append(best_acc)
 
