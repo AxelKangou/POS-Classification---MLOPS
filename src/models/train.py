@@ -16,7 +16,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # =====================
 # CONFIG
 # =====================
-DATA_DIR = "data/processed/"
+DATA_DIR = "dataset_pos_train/"
 BATCH_SIZE = 16
 EPOCHS = 3
 N_SPLITS = 5
