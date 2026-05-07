@@ -99,7 +99,7 @@ def main():
     model_dir = os.path.join(base_dir, 'models')
     os.makedirs(model_dir, exist_ok=True)
 
-    #Path("modelss").mkdir(parents=True, exist_ok=True)
+    Path("modelss").mkdir(parents=True, exist_ok=True)
     dataset = ImageFolder(DATA_DIR, transform=train_transform)
     targets = dataset.targets
     num_classes = len(dataset.classes)
