@@ -3,8 +3,8 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 import numpy as np
-import mlflow
-import mlflow.pytorch
+#import mlflow
+#import mlflow.pytorch
 
 from torchvision import transforms, models
 from torchvision.datasets import ImageFolder
@@ -18,7 +18,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # =====================
 DATA_DIR = "data/processed/"
 BATCH_SIZE = 16
-EPOCHS = 5
+EPOCHS = 3
 N_SPLITS = 5
 MODEL_NAME = "resnet18"  # or efficientnet_b0
 
@@ -92,6 +92,7 @@ def evaluate(model, loader):
 # =====================
 def main():
 
+    os.makedirs('models', exist_ok=True)
     dataset = ImageFolder(DATA_DIR, transform=train_transform)
     targets = dataset.targets
     num_classes = len(dataset.classes)
@@ -100,18 +101,9 @@ def main():
 
     fold_scores = []
 
-    mlflow.set_experiment("outlet_classification")
 
-    with mlflow.start_run():
 
-        mlflow.log_params({
-            "model": MODEL_NAME,
-            "batch_size": BATCH_SIZE,
-            "epochs": EPOCHS,
-            "n_splits": N_SPLITS
-        })
-
-        for fold, (train_idx, val_idx) in enumerate(skf.split(np.zeros(len(targets)), targets)):
+    for fold, (train_idx, val_idx) in enumerate(skf.split(np.zeros(len(targets)), targets)):
 
             print(f"\n🔥 Fold {fold+1}")
 
@@ -137,7 +129,7 @@ def main():
 
                 print(f"Epoch {epoch} | Loss {loss:.4f} | Acc {acc:.4f}")
 
-                mlflow.log_metric(f"fold_{fold}_acc", acc, step=epoch)
+
 
                 if acc > best_acc:
                     best_acc = acc
@@ -145,13 +137,8 @@ def main():
 
             fold_scores.append(best_acc)
 
-        avg_acc = np.mean(fold_scores)
-        print(f"\n✅ CV Accuracy: {avg_acc:.4f}")
-
-        mlflow.log_metric("cv_accuracy", avg_acc)
-
-        # Save last model
-        mlflow.pytorch.log_model(model, "model")
+    avg_acc = np.mean(fold_scores)
+    print(f"\n✅ CV Accuracy: {avg_acc:.4f}")
 
 
 if __name__ == "__main__":
