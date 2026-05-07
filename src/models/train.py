@@ -3,6 +3,8 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 import numpy as np
+import json
+
 #import mlflow
 #import mlflow.pytorch
 
@@ -10,6 +12,7 @@ from torchvision import transforms, models
 from torchvision.datasets import ImageFolder
 from torch.utils.data import DataLoader, Subset
 from sklearn.model_selection import StratifiedKFold
+from pathlib import Path
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -92,7 +95,7 @@ def evaluate(model, loader):
 # =====================
 def main():
 
-    os.makedirs('models', exist_ok=True)
+    Path("modelss").mkdir(parents=True, exist_ok=True)
     dataset = ImageFolder(DATA_DIR, transform=train_transform)
     targets = dataset.targets
     num_classes = len(dataset.classes)
@@ -139,6 +142,11 @@ def main():
 
     avg_acc = np.mean(fold_scores)
     print(f"\n✅ CV Accuracy: {avg_acc:.4f}")
+    with open("modelss/results.json", "w") as f:
+        json.dump(
+            {"cv accuracy": float(avg_acc)},
+            f
+        )
 
 
 if __name__ == "__main__":
