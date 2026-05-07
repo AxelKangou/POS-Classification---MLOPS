@@ -113,7 +113,7 @@ def main():
             train_subset.dataset.transform = train_transform
             val_subset.dataset.transform = val_transform
 
-            train_loader = DataLoader(train_subset, batch_size=BATCH_SIZE, shuffle=True)
+            train_loader = DataLoader(train_subset, batch_size=BATCH_SIZE, shuffle=True, num_workers=2)
             val_loader = DataLoader(val_subset, batch_size=BATCH_SIZE, shuffle=False)
 
             model = get_model(MODEL_NAME, num_classes)
