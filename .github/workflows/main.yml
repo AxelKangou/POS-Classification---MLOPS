@@ -44,11 +44,11 @@ jobs:
             path: modelss/
             retention-days: 1
 
-    evaluate:
-      steps:
-        - name: evaluate model
-          run: python src/models/evaluate.py
-          
+    # evaluate:
+    #  steps:
+    #    - name: evaluate model
+    #      run: python src/models/evaluate.py
+
 
     
 
