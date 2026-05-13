@@ -44,10 +44,16 @@ jobs:
             path: modelss/
             retention-days: 1
 
-    # evaluate:
-    #  steps:
-    #    - name: evaluate model
-    #      run: python src/models/evaluate.py
+
+        - name: Run Evaluation
+          run: python src/models/evaluate.py
+
+        - name: Commit and Push
+          run: |
+            git add models/
+            git commit -m "Add model and evaluation report [skip ci]" || echo "No changes"
+            git push
+
 
 
     

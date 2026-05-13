@@ -142,16 +142,17 @@ def main():
                     best_acc = acc
                     #save_path = os.path.join(model_dir, f"best_model_fold{fold}.pth")
                     #torch.save(model.state_dict(), save_path)
-                    torch.save(model.state_dict(), f"modelss/best_model_fold{fold}.pth")
+                    torch.save(model.state_dict(), f"models/best_model_fold{fold}.pth")
 
             fold_scores.append(best_acc)
 
     avg_acc = np.mean(fold_scores)
     print(f"\n✅ CV Accuracy: {avg_acc:.4f}")
-    with open("modelss/results.json", "w") as f:
+    with open("models/results.json", "w") as f:
         json.dump(
             {"cv accuracy": float(avg_acc)},
-            f
+            f,
+            indent=4
         )
 
 
