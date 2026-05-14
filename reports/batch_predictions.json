@@ -1,0 +1,34 @@
+{
+    "channel_roas1.png": {
+        "predicted_label": "roasteries",
+        "confidence": 0.6031
+    },
+    "channel_roas3.png": {
+        "predicted_label": "grocery",
+        "confidence": 0.9359
+    },
+    "channel1.png": {
+        "predicted_label": "grocery",
+        "confidence": 0.6998
+    },
+    "channel_groc2.png": {
+        "predicted_label": "grocery",
+        "confidence": 0.9685
+    },
+    "channel_groc1.png": {
+        "predicted_label": "vatrine",
+        "confidence": 0.9152
+    },
+    "channel_roas2.png": {
+        "predicted_label": "grocery",
+        "confidence": 0.5187
+    },
+    "channel_groc3.png": {
+        "predicted_label": "grocery",
+        "confidence": 0.9991
+    },
+    "channel_groc4.png": {
+        "predicted_label": "grocery",
+        "confidence": 0.9993
+    }
+}
