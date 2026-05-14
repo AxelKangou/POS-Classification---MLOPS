@@ -9,6 +9,8 @@ on:
 jobs:
     build-and-train:
         runs-on: ubuntu-latest
+        permissions: 
+          contents: write
 
         steps:
         - name: checkout code
@@ -50,8 +52,8 @@ jobs:
 
         - name: Commit and Push
           run: |
-            git config --global user.email "axelfkangou@gmail.com"
-            git config --global user.name "AxelKangou"
+            git config --global user.email "github-actions[bot]@users.noreply.github.com"
+            git config --global user.name "github-actions[bot]"
             git add models/
             git commit -m "Add model and evaluation report [skip ci]" || echo "No changes"
             git push
