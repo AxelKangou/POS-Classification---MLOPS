@@ -50,6 +50,8 @@ jobs:
 
         - name: Commit and Push
           run: |
+            git config --global user.email "axelfkangou@gmail.com"
+            git config --global user.name "AxelKangou"
             git add models/
             git commit -m "Add model and evaluation report [skip ci]" || echo "No changes"
             git push
