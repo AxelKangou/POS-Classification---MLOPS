@@ -36,6 +36,7 @@ def predict(image_path, model):
 
 if __name__ == "__main__":
     model = load_model()
-    image_to_test = os.path.join(TEST_DIR,"channel1.png")
-    result = predict(image_to_test, model)
-    print(result)
+    for image_to_test in os.listdir(TEST_DIR):    
+    #image_to_test = os.path.join(TEST_DIR,"channel1.png")
+        result = predict(os.path.join(TEST_DIR,image_to_test), model)
+        print(f"{image_to_test}:{result['predicted_label']} ({result['confidence']})")

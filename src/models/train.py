@@ -151,8 +151,7 @@ def main():
     with open("models/results.json", "w") as f:
         json.dump(
             {"cv accuracy": float(avg_acc)},
-            f,
-            indent=4
+            f#, indent=4
         )
 
 
