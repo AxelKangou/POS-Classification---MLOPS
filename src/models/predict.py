@@ -4,7 +4,7 @@ from PIL import Image
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 TEST_DIR = "test_prediction/"
-CLASSES = ["supermarket", "minimarket", "kiosk", "grocery"]
+CLASSES = ["grocery", "roasteries", "vatrine"]
 
 def load_model():
     model = models.resnet18()
