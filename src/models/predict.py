@@ -1,10 +1,13 @@
 import torch
 import os
+import json 
+from pathlib import Path  
 from torchvision import transforms, models
 from PIL import Image
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 TEST_DIR = "test_prediction/"
+REPORT_DIR = "reports"
 CLASSES = ["grocery", "roasteries", "vatrine"]
 
 def load_model(path="models/best_model_fold0.pth"):
@@ -36,7 +39,27 @@ def predict(image_path, model):
 
 if __name__ == "__main__":
     model = load_model()
-    for image_to_test in os.listdir(TEST_DIR):    
-    #image_to_test = os.path.join(TEST_DIR,"channel1.png")
-        result = predict(os.path.join(TEST_DIR,image_to_test), model)
-        print(f"{image_to_test}:{result['predicted_label']} ({result['confidence']})")
+    results = {}
+    report_dir = Path(REPORT_DIR)
+    report_dir.mkdir(exist_ok=True)
+    print(f"🚀 Starting batch prediction in {TEST_DIR}...")
+
+    valid_extensions = ('.png', '.jpg', '.jpeg', '.webp')
+
+    for img_name in os.listdir(TEST_DIR):
+        if img_name.lower().endswith(valid_extensions):
+            image_path = os.path.join(TEST_DIR, img_name)
+            
+            # Run prediction
+            prediction = predict(image_path, model)
+            
+            # Store result using filename as the key
+            results[img_name] = prediction
+            print(f"Processed: {img_name} -> {prediction['predicted_label']}")
+    
+    output_path = report_dir/"batch_predictions.json"
+    with open(output_path, "w", encoding="utf-8") as f:
+        json.dump(results, f, indent=4)
+    
+    print(f"\n ✅ Batch prediction complete. result saved to : {output_path}")
+
