@@ -1,4 +1,5 @@
 import torch
+import os
 from torchvision import transforms, models
 from PIL import Image
 
@@ -6,10 +7,10 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 TEST_DIR = "test_prediction/"
 CLASSES = ["grocery", "roasteries", "vatrine"]
 
-def load_model():
+def load_model(path="models/best_model_fold0.pth"):
     model = models.resnet18()
     model.fc = torch.nn.Linear(model.fc.in_features, len(CLASSES))
-    model.load_state_dict(torch.load("models/best_model_fold0.pth"))
+    model.load_state_dict(torch.load(path, map_location=device))
     model.to(device)
     model.eval()
     return model
@@ -30,10 +31,11 @@ def predict(image_path, model):
 
     return {
         "predicted_label": CLASSES[pred.item()],
-        "confidence": float(conf.item())
+        "confidence": round(float(conf.item()), 4)
     }
 
 if __name__ == "__main__":
     model = load_model()
-    result = predict("TEST_DIR/channel1.png", model)
+    image_to_test = os.path.join(TEST_DIR,"channel1.png")
+    result = predict(image_to_test, model)
     print(result)
