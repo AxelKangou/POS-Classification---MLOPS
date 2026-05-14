@@ -57,6 +57,9 @@ jobs:
             git add models/
             git commit -m "Add model and evaluation report [skip ci]" || echo "No changes"
             git push
+        
+        - name: Run Prediction
+          run: python src/models/predict.py
 
 
 

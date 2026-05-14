@@ -3,7 +3,7 @@ from torchvision import transforms, models
 from PIL import Image
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
+TEST_DIR = "test_prediction/"
 CLASSES = ["supermarket", "minimarket", "kiosk", "grocery"]
 
 def load_model():
@@ -35,5 +35,5 @@ def predict(image_path, model):
 
 if __name__ == "__main__":
     model = load_model()
-    result = predict("test.jpg", model)
+    result = predict("TEST_DIR/channel1.png", model)
     print(result)
