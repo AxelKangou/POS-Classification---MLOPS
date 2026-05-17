@@ -1,9 +1,9 @@
               precision    recall  f1-score   support
 
-     grocery       1.00      0.09      0.17        11
-  roasteries       0.58      0.92      0.71        12
-     vatrine       0.80      0.94      0.86        17
+     grocery       0.36      0.45      0.40        11
+  roasteries       0.42      0.67      0.52        12
+     vatrine       1.00      0.41      0.58        17
 
-    accuracy                           0.70        40
-   macro avg       0.79      0.65      0.58        40
-weighted avg       0.79      0.70      0.63        40
+    accuracy                           0.50        40
+   macro avg       0.59      0.51      0.50        40
+weighted avg       0.65      0.50      0.51        40
