@@ -1,98 +1,98 @@
 {
-    "113_11-1019-3c4de1764c209ad91d835dcf886b5245.png": {
+    "channel_groc4.png": {
         "predicted_label": "vatrine",
-        "confidence": 0.642
-    },
-    "109_11-1018-115d5b44404949829bea6583f2d97ea1.png": {
-        "predicted_label": "roasteries",
-        "confidence": 0.8765
-    },
-    "103_11-1018-1f3a7be09de30a6cb5d2d7e2eb5f5dd3.png": {
-        "predicted_label": "vatrine",
-        "confidence": 0.6433
-    },
-    "channel_roas1.png": {
-        "predicted_label": "roasteries",
-        "confidence": 0.9992
-    },
-    "102_11-1018-2f3ec30b1b40cca042176b1490d54abd.png": {
-        "predicted_label": "vatrine",
-        "confidence": 0.7645
-    },
-    "101_11-1018-2445634ad3d6b816335159fe3d72c005.png": {
-        "predicted_label": "roasteries",
-        "confidence": 0.6995
-    },
-    "104_11-1018-c6c4d29708af119e90634cada550f313.png": {
-        "predicted_label": "roasteries",
-        "confidence": 0.9817
-    },
-    "channel_roas3.png": {
-        "predicted_label": "roasteries",
-        "confidence": 0.8306
-    },
-    "0_11-1019-bdd1b2cac2af1cd3ff6e4f9f8fc8d478.png": {
-        "predicted_label": "roasteries",
-        "confidence": 0.5979
-    },
-    "channel1.png": {
-        "predicted_label": "grocery",
-        "confidence": 0.701
-    },
-    "channel_groc2.png": {
-        "predicted_label": "grocery",
-        "confidence": 0.9333
-    },
-    "channel_groc1.png": {
-        "predicted_label": "vatrine",
-        "confidence": 0.4002
-    },
-    "100_11-1018-3c2a3a23e96cfcd11c680c6e732e62ac.png": {
-        "predicted_label": "roasteries",
-        "confidence": 0.9689
+        "confidence": 0.8668
     },
     "10_11-1018-2ad3aa3633be0dc66605b2f159a5acd4.png": {
         "predicted_label": "grocery",
-        "confidence": 0.7667
-    },
-    "channel_roas2.png": {
-        "predicted_label": "roasteries",
-        "confidence": 0.6736
-    },
-    "114_11-1018-5e28fe69e71848a6392f3e889e3bca36.png": {
-        "predicted_label": "grocery",
-        "confidence": 0.959
+        "confidence": 0.4956
     },
     "111_11-1018-dfd8f5723a6fd89dd65e5e154e4a308b.png": {
         "predicted_label": "vatrine",
-        "confidence": 0.6254
+        "confidence": 0.9621
+    },
+    "109_11-1018-115d5b44404949829bea6583f2d97ea1.png": {
+        "predicted_label": "vatrine",
+        "confidence": 0.5676
+    },
+    "102_11-1018-2f3ec30b1b40cca042176b1490d54abd.png": {
+        "predicted_label": "vatrine",
+        "confidence": 0.9982
+    },
+    "101_11-1018-2445634ad3d6b816335159fe3d72c005.png": {
+        "predicted_label": "vatrine",
+        "confidence": 0.9979
     },
     "channel_groc3.png": {
-        "predicted_label": "grocery",
-        "confidence": 0.9984
-    },
-    "110_11-1018-968f57842b213cd6c4066e1fa892c6c2.png": {
-        "predicted_label": "vatrine",
-        "confidence": 0.5159
-    },
-    "105_11-1018-c57a63319c6ec3096b5a91ddb84c1e59.png": {
-        "predicted_label": "grocery",
-        "confidence": 0.5514
-    },
-    "channel_groc4.png": {
-        "predicted_label": "grocery",
-        "confidence": 0.4868
-    },
-    "115_11-1018-48c015a611a78eaa50314b9b5698f32c.png": {
         "predicted_label": "roasteries",
-        "confidence": 0.9994
+        "confidence": 0.9371
+    },
+    "100_11-1018-3c2a3a23e96cfcd11c680c6e732e62ac.png": {
+        "predicted_label": "roasteries",
+        "confidence": 0.7607
     },
     "107_11-1018-653b1b5f60be2419ccbff803580e67ff.png": {
         "predicted_label": "vatrine",
-        "confidence": 0.9732
+        "confidence": 0.9535
+    },
+    "114_11-1018-5e28fe69e71848a6392f3e889e3bca36.png": {
+        "predicted_label": "roasteries",
+        "confidence": 0.5844
+    },
+    "115_11-1018-48c015a611a78eaa50314b9b5698f32c.png": {
+        "predicted_label": "roasteries",
+        "confidence": 0.5375
+    },
+    "0_11-1019-bdd1b2cac2af1cd3ff6e4f9f8fc8d478.png": {
+        "predicted_label": "vatrine",
+        "confidence": 0.9932
     },
     "106_11-1018-9e220f9cbb9fc5fadbe2260ca13eb126.png": {
         "predicted_label": "vatrine",
-        "confidence": 0.9588
+        "confidence": 0.9997
+    },
+    "channel_roas1.png": {
+        "predicted_label": "vatrine",
+        "confidence": 0.5636
+    },
+    "channel_groc1.png": {
+        "predicted_label": "vatrine",
+        "confidence": 0.9204
+    },
+    "105_11-1018-c57a63319c6ec3096b5a91ddb84c1e59.png": {
+        "predicted_label": "grocery",
+        "confidence": 0.5806
+    },
+    "channel_roas2.png": {
+        "predicted_label": "vatrine",
+        "confidence": 0.9122
+    },
+    "113_11-1019-3c4de1764c209ad91d835dcf886b5245.png": {
+        "predicted_label": "vatrine",
+        "confidence": 0.9979
+    },
+    "103_11-1018-1f3a7be09de30a6cb5d2d7e2eb5f5dd3.png": {
+        "predicted_label": "vatrine",
+        "confidence": 0.8098
+    },
+    "channel_roas3.png": {
+        "predicted_label": "roasteries",
+        "confidence": 0.9994
+    },
+    "channel_groc2.png": {
+        "predicted_label": "grocery",
+        "confidence": 0.9151
+    },
+    "channel1.png": {
+        "predicted_label": "vatrine",
+        "confidence": 0.9991
+    },
+    "104_11-1018-c6c4d29708af119e90634cada550f313.png": {
+        "predicted_label": "roasteries",
+        "confidence": 0.4846
+    },
+    "110_11-1018-968f57842b213cd6c4066e1fa892c6c2.png": {
+        "predicted_label": "vatrine",
+        "confidence": 0.8837
     }
 }
