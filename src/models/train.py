@@ -5,8 +5,8 @@ import torch.optim as optim
 import numpy as np
 import json
 
-#import mlflow
-#import mlflow.pytorch
+import mlflow
+import mlflow.pytorch
 
 from torchvision import transforms, models
 from torchvision.datasets import ImageFolder
@@ -16,12 +16,15 @@ from pathlib import Path
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+mlflow.set_tracking_uri("http://ec2-54-146-250-243.compute-1.amazonaws.com:5000")
+mlflow.set_experiment("Pos classification")
+
 # =====================
 # CONFIG
 # =====================
 DATA_DIR = "dataset_pos_train/"
 BATCH_SIZE = 16
-EPOCHS = 3
+EPOCHS = 1
 N_SPLITS = 3
 MODEL_NAME = "resnet18"  # or efficientnet_b0
 
@@ -108,51 +111,64 @@ def main():
 
     fold_scores = []
 
-
-
-    for fold, (train_idx, val_idx) in enumerate(skf.split(np.zeros(len(targets)), targets)):
-
-            print(f"\n🔥 Fold {fold+1}")
-
-            train_subset = Subset(dataset, train_idx)
-            val_subset = Subset(dataset, val_idx)
-
-            train_subset.dataset.transform = train_transform
-            val_subset.dataset.transform = val_transform
-
-            train_loader = DataLoader(train_subset, batch_size=BATCH_SIZE, shuffle=True, num_workers=2)
-            val_loader = DataLoader(val_subset, batch_size=BATCH_SIZE, shuffle=False)
-
-            model = get_model(MODEL_NAME, num_classes)
-
-            optimizer = optim.Adam(model.parameters(), lr=1e-3)
-            loss_fn = nn.CrossEntropyLoss()
-
-            best_acc = 0
-
-            for epoch in range(EPOCHS):
-                loss = train_one_epoch(model, train_loader, optimizer, loss_fn)
-                acc = evaluate(model, val_loader)
-
-                print(f"Epoch {epoch} | Loss {loss:.4f} | Acc {acc:.4f}")
+    with mlflow.start_run(run_name=f"{MODEL_NAME}_{N_SPLITS}fold_cv"):
+        mlflow.log_param("BATCH_SIZE", 16)
+        mlflow.log_param("EPOCHS", 1)
+        mlflow.log_param("N_SPLITS", 3)
 
 
 
-                if acc > best_acc:
-                    best_acc = acc
-                    #save_path = os.path.join(model_dir, f"best_model_fold{fold}.pth")
-                    #torch.save(model.state_dict(), save_path)
-                    torch.save(model.state_dict(), f"models/best_model_fold{fold}.pth")
 
-            fold_scores.append(best_acc)
+        for fold, (train_idx, val_idx) in enumerate(skf.split(np.zeros(len(targets)), targets)):
 
-    avg_acc = np.mean(fold_scores)
-    print(f"\n✅ CV Accuracy: {avg_acc:.4f}")
-    with open("models/results.json", "w") as f:
-        json.dump(
-            {"cv accuracy": float(avg_acc)},
-            f#, indent=4
-        )
+                print(f"\n🔥 Fold {fold+1}")
+
+                train_subset = Subset(dataset, train_idx)
+                val_subset = Subset(dataset, val_idx)
+
+                train_subset.dataset.transform = train_transform
+                val_subset.dataset.transform = val_transform
+
+                train_loader = DataLoader(train_subset, batch_size=BATCH_SIZE, shuffle=True, num_workers=2)
+                val_loader = DataLoader(val_subset, batch_size=BATCH_SIZE, shuffle=False)
+
+                model = get_model(MODEL_NAME, num_classes)
+
+                optimizer = optim.Adam(model.parameters(), lr=1e-3)
+                loss_fn = nn.CrossEntropyLoss()
+
+                best_acc = 0
+
+                for epoch in range(EPOCHS):
+                    loss = train_one_epoch(model, train_loader, optimizer, loss_fn)
+
+                    acc = evaluate(model, val_loader)
+
+                    print(f"Epoch {epoch} | Loss {loss:.4f} | Acc {acc:.4f}")
+
+
+
+                    if acc > best_acc:
+                        best_acc = acc
+                        #save_path = os.path.join(model_dir, f"best_model_fold{fold}.pth")
+                        #torch.save(model.state_dict(), save_path)
+                        torch.save(model.state_dict(), f"models/best_model_fold{fold}.pth")
+                        mlflow.log_artifact(f"models/best_model_fold{fold}.pth", artifact_path=f"weights/fold_{fold}"
+    )
+                        mlflow.pytorch.log_model(model,f"model_fold{fold}")
+
+                fold_scores.append(best_acc)
+                
+
+        avg_acc = np.mean(fold_scores)
+        mlflow.log_metric("avg accuracy", avg_acc)
+        print(f"\n✅ CV Accuracy: {avg_acc:.4f}")
+        with open("models/results.json", "w") as f:
+            json.dump(
+                {"cv accuracy": float(avg_acc)},
+                f#, indent=4
+            )
+        mlflow.log_artifact("models/results.json")
 
 
 if __name__ == "__main__":
