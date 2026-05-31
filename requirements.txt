@@ -2,3 +2,6 @@ torch
 torchvision
 numpy
 scikit-learn
+mlflow
+boto3
+pytorch
